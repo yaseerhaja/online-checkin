@@ -1,0 +1,14 @@
+.online-checkin {
+  height: 100vh;
+
+  .mat-toolbar {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background: url("/assets/img/af_pattern_bg.png");
+  }
+
+  .container {
+    margin: auto 40px;
+  }
+}
