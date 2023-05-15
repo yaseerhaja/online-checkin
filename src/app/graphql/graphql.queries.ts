@@ -28,6 +28,30 @@ const GET_QUERY = gql`
               type
               informational
             }
+            origin {
+              IATACode
+              name
+              city {
+                IATACode
+                name
+                country {
+                  code
+                  name
+                }
+              }
+            }
+            destination {
+              IATACode
+              name
+              city {
+                IATACode
+                name
+                country {
+                  code
+                  name
+                }
+              }
+            }
           }
         }
       }

@@ -210,9 +210,9 @@ const typeDefs = `#graphql
     operatingFlight:String
   }
 
-  interface IATAData {
-    IATACode: String
-    name: String
+  type IATAData {
+    IATACode: String!
+    name: String!
     city: City
   }
 
@@ -222,7 +222,7 @@ const typeDefs = `#graphql
     country:Country
   }
 
-  type Country{
+  type Country {
     code: String
     name: String
   }
@@ -231,8 +231,6 @@ const typeDefs = `#graphql
 const resolvers = {
   Query: {
     checkinInfo: (_, { input }) => {
-      console.log("Input===>" + JSON.stringify(input));
-
       if (
         data.bookingCode === input.bookingCode &&
         data.passengers.lastName === input.lastName
@@ -255,6 +253,11 @@ const resolvers = {
       }
 
       return null; // GraphQLError is thrown
+    },
+  },
+  IATAData: {
+    __resolveType: (parameter) => {
+      return parameter.IATACode;
     },
   },
 };

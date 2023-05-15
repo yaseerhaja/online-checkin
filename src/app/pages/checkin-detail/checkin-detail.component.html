@@ -1,12 +1,52 @@
-<section>
-  <mat-card *ngIf="checkInData.errorCode">
+<section class="oc-checkin-detail">
+  <mat-card *ngIf="checkInData && checkInData.errorCode">
     <mat-card-content>
       <p>{{ checkInData.message }}</p>
     </mat-card-content>
   </mat-card>
-  <mat-card *ngIf="!checkInData.errorCode">
-    <mat-card-content>
-      <p>Booking Code: {{ checkInData.bookingCode }}</p>
-    </mat-card-content>
-  </mat-card>
+
+  <mat-accordion
+    *ngIf="checkInData && !checkInData.errorCode"
+    class="oc-checkin-detail-expansion"
+  >
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="oc-checkin-detail-expansion-title">
+          <span>Booking Code:</span>
+          <p>{{ checkInData.bookingCode }}</p>
+        </mat-panel-title>
+        <mat-panel-description class="oc-checkin-detail-expansion-desc">
+          {{ checkInData.passengers.title.code }}
+          {{ checkInData.passengers.firstName }}
+          {{ checkInData.passengers.lastName }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-header>
+          <h3>Personal Information</h3>
+        </mat-card-header>
+        <mat-card-content>
+          <span>Email:</span>
+          <span *ngFor="let contact of checkInData.contactDetails">{{
+            contact.address
+          }}</span>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <h3>Itinerary</h3>
+        </mat-card-header>
+        <mat-card-content>
+          <span>Type:</span>
+          <span>{{ checkInData.itinerary.type }}</span>
+          <span>Connections:</span>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="home"
+          ></mat-icon>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
 </section>

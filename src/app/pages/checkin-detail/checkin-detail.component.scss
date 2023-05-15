@@ -1,0 +1,13 @@
+.oc-checkin-detail {
+  &-expansion {
+    &-title {
+      align-items: flex-start;
+      flex-flow: column wrap;
+
+      span {
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+  }
+}

@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { ActivatedRoute } from '@angular/router';
-import { CheckInDataType } from './checkin-detail.types';
 import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-checkin-detail',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, MatExpansionModule, MatIconModule],
   templateUrl: './checkin-detail.component.html',
   styleUrls: ['./checkin-detail.component.scss'],
 })
