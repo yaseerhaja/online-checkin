@@ -1,5 +1,9 @@
-export const resolvers = {
+// const fs = require("fs");
+// const data = fs.readFileSync('../mocks/checkin-detail.json');
+
+
+const resolvers = {
   Query: {
-    hello: () => 'world',
+    hello: () => JSON.parse(data),
   },
 };

@@ -4,20 +4,22 @@
       <h1>RETRIEVE YOUR BOOKING</h1>
       <span class="oc-checkin-card-divider"></span>
     </mat-card-title>
+
     <mat-card-content class="oc-checkin-card-content">
       <p>
         You can find your booking by filling out your family name and the
         booking code in your booking confirmation.
       </p>
-
-      <mat-form-field class="oc-checkin-form-field">
-        <mat-label>Booking Code</mat-label>
-        <input matInput placeholder="ABCR4E" />
-      </mat-form-field>
-      <mat-form-field class="oc-checkin-form-field">
-        <mat-label>Family name</mat-label>
-        <input matInput placeholder="Karthik" />
-      </mat-form-field>
+      <form [formGroup]="checkinForm" (ngSubmit)="retrieveDetails()">
+        <mat-form-field class="oc-checkin-form-field">
+          <mat-label>Booking Code</mat-label>
+          <input matInput formControlName="bookingCode" placeholder="ABCR4E" />
+        </mat-form-field>
+        <mat-form-field class="oc-checkin-form-field">
+          <mat-label>Family name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Karthik" />
+        </mat-form-field>
+      </form>
     </mat-card-content>
     <mat-card-actions class="oc-checkin-card-actions">
       <button mat-raised-button color="warn">Retrieve booking</button>
