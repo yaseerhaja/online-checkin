@@ -5,6 +5,7 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import http from "http";
 import cors from "cors";
 import bodyParser from "body-parser";
+
 // import fs from "fs";
 // const data = fs.readFileSync("./mocks/checkin-detail.json");
 
@@ -136,7 +137,19 @@ const data = {
 
 const typeDefs = `#graphql
   type Query {
-    checkinInfo: CheckinData
+    checkinInfo(input: CheckInInput): CheckInDataResponse
+  }
+
+  union CheckInDataResponse = CheckinData | ErrorContent
+
+  input CheckInInput {
+    bookingCode: String
+    lastName: String
+  }
+
+  type ErrorContent {
+    errorCode: Int
+    message: String
   }
 
   type CheckinData {
@@ -217,7 +230,32 @@ const typeDefs = `#graphql
 
 const resolvers = {
   Query: {
-    checkinInfo: () => data,
+    checkinInfo: (_, { input }) => {
+      console.log("Input===>" + JSON.stringify(input));
+
+      if (
+        data.bookingCode === input.bookingCode &&
+        data.passengers.lastName === input.lastName
+      ) {
+        return data;
+      }
+
+      return {
+        errorCode: "404",
+        message: "Booking Code and last Name is invalid",
+      };
+    },
+  },
+  CheckInDataResponse: {
+    __resolveType: (parameter, context, info) => {
+      if (parameter.bookingCode) {
+        return "CheckinData";
+      } else {
+        return "ErrorContent";
+      }
+
+      return null; // GraphQLError is thrown
+    },
   },
 };
 

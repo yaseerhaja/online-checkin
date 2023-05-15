@@ -10,19 +10,37 @@
         You can find your booking by filling out your family name and the
         booking code in your booking confirmation.
       </p>
-      <form [formGroup]="checkinForm" (ngSubmit)="retrieveDetails()">
+      <form [formGroup]="checkinForm">
         <mat-form-field class="oc-checkin-form-field">
           <mat-label>Booking Code</mat-label>
-          <input matInput formControlName="bookingCode" placeholder="ABCR4E" />
+          <input
+            matInput
+            formControlName="bookingCode"
+            placeholder="ABCR4E"
+            style="text-transform: uppercase"
+          />
+          <mat-error *ngIf="checkinForm.controls.bookingCode.invalid">{{
+            getBookingErrorMessage()
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field class="oc-checkin-form-field">
           <mat-label>Family name</mat-label>
-          <input matInput formControlName="lastName" placeholder="Karthik" />
+          <input
+            matInput
+            formControlName="lastName"
+            placeholder="Karthik"
+            style="text-transform: uppercase"
+          />
+          <mat-error *ngIf="checkinForm.controls.lastName.invalid">{{
+            getLastNameErrorMessage()
+          }}</mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions class="oc-checkin-card-actions">
-      <button mat-raised-button color="warn">Retrieve booking</button>
+      <button mat-raised-button color="warn" (click)="retrieveDetails($event)">
+        Retrieve booking
+      </button>
     </mat-card-actions>
   </mat-card>
 </section>

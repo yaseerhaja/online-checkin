@@ -1,1 +1,12 @@
-<p>checkin-detail works!</p>
+<section>
+  <mat-card *ngIf="checkInData.errorCode">
+    <mat-card-content>
+      <p>{{ checkInData.message }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="!checkInData.errorCode">
+    <mat-card-content>
+      <p>Booking Code: {{ checkInData.bookingCode }}</p>
+    </mat-card-content>
+  </mat-card>
+</section>

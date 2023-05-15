@@ -1,0 +1,6 @@
+yarn run v1.22.19
+$ node server/index.mjs
+🚀 Server ready at http://localhost:4000/
+Input===>{"bookingCode":"asssds","lastName":"sd"}
+Input===>{"bookingCode":"asssds","lastName":"sd"}
+Input===>{"bookingCode":"PZIGZ3","lastName":"HESP"}

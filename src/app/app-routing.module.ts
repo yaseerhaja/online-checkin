@@ -10,7 +10,7 @@ const routes: Routes = [
     component: CheckinComponent,
   },
   {
-    path: 'details',
+    path: 'checkin-details',
     component: CheckinDetailComponent,
   },
   { path: '', redirectTo: '/checkin', pathMatch: 'full' },

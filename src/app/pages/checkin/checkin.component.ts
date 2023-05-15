@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
@@ -12,15 +12,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
-import { Apollo } from 'apollo-angular';
-import { gql } from 'apollo-angular';
-
-const GET_QUERY = gql`
-  query {
-    hello
-  }
-`;
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkin',
@@ -37,36 +29,59 @@ const GET_QUERY = gql`
   templateUrl: './checkin.component.html',
   styleUrls: ['./checkin.component.scss'],
 })
-export class CheckinComponent implements OnInit {
-  data: any[] = [];
-  error: any;
-
+export class CheckinComponent {
+  constructor(private router: Router) {}
   public checkinForm = new FormGroup({
-    bookingCode: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
+    bookingCode: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(6),
+      Validators.minLength(5),
+      Validators.pattern('^[2-9a-zA-Z]*$'),
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(30),
+    ]),
   });
 
-  constructor(private apollo: Apollo) {}
+  public retrieveDetails(e: Event) {
+    if (e) {
+      e.preventDefault();
+    }
+    this.checkinForm.markAllAsTouched();
+    let formIns = this.checkinForm.getRawValue();
 
-  ngOnInit() {
-    this.apollo
-      .query({
-        query: GET_QUERY,
-        variables: {
-          bookingCode: this.checkinForm.controls.bookingCode,
-          lastName: this.checkinForm.controls.lastName,
-        },
-      })
-      .subscribe(
-        ({ data }: any) => {
-          this.data = data;
-          this.checkinForm.reset();
-        },
-        (error) => {
-          this.error = error;
-        }
-      );
+    // stop here if form is invalid
+    if (this.checkinForm.invalid) {
+      return;
+    }
+
+    this.router.navigate([
+      '/checkin-details',
+      { bookingCode: formIns.bookingCode, lastName: formIns.lastName },
+    ]);
   }
 
-  public retrieveDetails() {}
+  public getBookingErrorMessage(): string {
+    return this.checkinForm.controls.bookingCode.hasError('required')
+      ? 'Required'
+      : this.checkinForm.controls.bookingCode.hasError('maxlength')
+      ? 'Max 6 char!'
+      : this.checkinForm.controls.bookingCode.hasError('minlength')
+      ? 'Min 5 char!'
+      : this.checkinForm.controls.bookingCode.hasError('pattern')
+      ? 'Should contain only Numbers from (2-9) and Alphabets'
+      : '';
+  }
+
+  public getLastNameErrorMessage(): string {
+    return this.checkinForm.controls.lastName.hasError('required')
+      ? 'Required'
+      : this.checkinForm.controls.lastName.hasError('maxlength')
+      ? 'Max 30 char!'
+      : this.checkinForm.controls.lastName.hasError('minlength')
+      ? 'Min 2 char!'
+      : '';
+  }
 }
