@@ -1,23 +1,35 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { Apollo } from 'apollo-angular';
+import { AppService } from 'src/app/app.service';
 import { CheckinComponent } from './checkin.component';
 
 describe('CheckinComponent', () => {
-  let component: CheckinComponent;
-  let fixture: ComponentFixture<CheckinComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ CheckinComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(CheckinComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  let spectator: Spectator<CheckinComponent>;
+  const createComponent = createComponentFactory({
+    component: CheckinComponent,
+    imports: [
+      CommonModule,
+      MatCardModule,
+      FormsModule,
+      MatInputModule,
+      MatFormFieldModule,
+      MatButtonModule,
+      ReactiveFormsModule,
+      NoopAnimationsModule,
+    ],
+    providers: [AppService, Apollo],
   });
 
+  beforeEach(() => (spectator = createComponent()));
+
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

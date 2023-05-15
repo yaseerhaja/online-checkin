@@ -31,6 +31,7 @@ import { Router } from '@angular/router';
 })
 export class CheckinComponent {
   constructor(private router: Router) {}
+
   public checkinForm = new FormGroup({
     bookingCode: new FormControl('', [
       Validators.required,

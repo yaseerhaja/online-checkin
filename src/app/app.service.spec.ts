@@ -1,16 +1,18 @@
-import { TestBed } from '@angular/core/testing';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { Apollo } from 'apollo-angular';
 
 import { AppService } from './app.service';
 
 describe('AppService', () => {
-  let service: AppService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(AppService);
+  let spectator: SpectatorService<AppService>;
+  const createService = createServiceFactory({
+    service: AppService,
+    providers: [Apollo],
   });
 
+  beforeEach(() => (spectator = createService()));
+
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(spectator.service).toBeTruthy();
   });
 });

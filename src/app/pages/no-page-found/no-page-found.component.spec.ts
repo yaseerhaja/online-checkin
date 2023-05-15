@@ -1,23 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { NoPageFoundComponent } from './no-page-found.component';
 
 describe('NoPageFoundComponent', () => {
-  let component: NoPageFoundComponent;
-  let fixture: ComponentFixture<NoPageFoundComponent>;
+  let spectator: Spectator<NoPageFoundComponent>;
+  const createComponent = createComponentFactory(NoPageFoundComponent);
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ NoPageFoundComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(NoPageFoundComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

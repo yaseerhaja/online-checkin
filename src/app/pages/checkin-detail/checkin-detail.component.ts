@@ -21,7 +21,7 @@ export class CheckinDetailComponent implements OnInit, OnDestroy {
 
   constructor(private appService: AppService, private route: ActivatedRoute) {}
   ngOnInit() {
-    this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
+    this.route.paramMap?.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const bookingCode = params.get('bookingCode') ?? '';
       const lastName = params.get('lastName') ?? '';
       this.getCheckinDetail(bookingCode, lastName);
