@@ -45,3 +45,15 @@
     margin-bottom: 8px;
   }
 }
+
+@media (max-width: 1280px) {
+}
+
+@media (max-width: 640px) {
+  .oc-checkin {
+    margin: 10px;
+    &-card h1 {
+      margin: 10px;
+    }
+  }
+}

@@ -34,17 +34,60 @@
       </mat-card>
       <mat-card>
         <mat-card-header>
-          <h3>Itinerary</h3>
+          <h3>Itinerary Type: {{ checkInData.itinerary.type }}</h3>
         </mat-card-header>
         <mat-card-content>
-          <span>Type:</span>
-          <span>{{ checkInData.itinerary.type }}</span>
-          <span>Connections:</span>
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="home"
-          ></mat-icon>
+          <div
+            class="oc-checkin-detail-itenerary"
+            *ngFor="let connection of checkInData.itinerary.connections"
+          >
+            <div class="oc-checkin-detail-itenerary-origin">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="flight_takeoff"
+              ></mat-icon>
+              <div>
+                <span
+                  >{{ connection.origin.name }} ({{
+                    connection.origin.IATACode
+                  }})</span
+                >
+                <span
+                  >{{ connection.origin.city.name }} -
+                  {{ connection.origin.city.country.name }}</span
+                >
+              </div>
+            </div>
+            <div class="oc-checkin-detail-itenerary-duration">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="swap_horiz"
+              ></mat-icon>
+              <div>
+                <span>{{ connection.duration }} mins</span>
+              </div>
+            </div>
+            <div class="oc-checkin-detail-itenerary-destination">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="flight_land"
+              ></mat-icon>
+              <div>
+                <span
+                  >{{ connection.destination.name }} ({{
+                    connection.destination.IATACode
+                  }})</span
+                >
+                <span
+                  >{{ connection.destination.city.name }} -
+                  {{ connection.destination.city.country.name }}</span
+                >
+              </div>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-expansion-panel>

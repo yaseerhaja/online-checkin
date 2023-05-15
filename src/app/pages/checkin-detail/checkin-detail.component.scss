@@ -1,4 +1,13 @@
 .oc-checkin-detail {
+  margin: auto 40px;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+
+  mat-accordion {
+    width: 100%;
+  }
+
   &-expansion {
     &-title {
       align-items: flex-start;
@@ -7,6 +16,49 @@
       span {
         font-size: 12px;
         font-weight: 400;
+      }
+    }
+    mat-card {
+      margin: 20px 0;
+    }
+  }
+
+  &-itenerary {
+    display: flex;
+    justify-content: space-between;
+
+    &-origin,
+    &-destination,
+    &-duration {
+      align-items: center;
+      display: flex;
+      flex-flow: column wrap;
+      mat-icon {
+        font-size: 56px;
+        height: auto;
+        width: auto;
+      }
+      span {
+        display: block;
+      }
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+}
+
+@media (max-width: 640px) {
+  .oc-checkin-detail {
+    margin: 10px;
+
+    &-itenerary {
+      &-origin,
+      &-destination,
+      &-duration {
+        mat-icon {
+          font-size: 26px;
+        }
       }
     }
   }
